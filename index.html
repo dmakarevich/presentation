@@ -120,8 +120,8 @@ console.log(phrase);
 						<li>import via “<span class="select">require</span>”</li>
 						<li>Complex Syntax</li>
 					</ul>
-					<p>In addition, AMD implementations allow developers to encapsulate code in smaller, more logically-organized files, just like Java, and other programming languages.</p>
-					<p>The AMD specification is implemented by Dojo Toolkit, RequireJS, and ScriptManJS.</p>
+					<p class="description">In addition, AMD implementations allow developers to encapsulate code in smaller, more logically-organized files, just like Java, and other programming languages.</p>
+					<p class="description">The AMD specification is implemented by Dojo Toolkit, RequireJS, and ScriptManJS.</p>
 				</section>
 				<section>
 					<p>Example</p>
@@ -152,10 +152,66 @@ define(['./lib/greeting'], function(greeting) {
 				<section>
 					<h3>UMD</h3>
 				</section>
+				<section>
+					<p>Main implementation features:</p>
+					<ul class="list">
+						<li>Combination of <span class="select">CommonJs</span> + <span class="select">AMD</span> (that is, Syntax of CommonJs + async loading of AMD)</li>
+						<li>Can be used for both <span class="select">AMD/CommonJs</span> environments</li>
+						<li>UMD essentially creates a way to use either of the two, while also supporting the global variable definition.
+							As a result, UMD modules are capable of working on both <span class="select">client and server</span>.
+						</li>
+					</ul>
+					<p class="description">Part of the reasons to choose Es6 is that it is simple to use, it is compatible with a browser and non-browser environment,
+						it is very fast in compiling, it operates smoothly with existing Javascript modules like AMD, CommonJs, and Node.js, etc.
+					</p>
+				</section>
+				<section>
+					<p>Example</p>
+					<pre>
+						<code class="javascript hljs" style="font-size: 16px;">// file lib/greeting.js
+define(function() {
+    var helloInLang = {
+        en: 'Hello world!',
+        es: '¡Hola mundo!',
+        ru: 'Привет, мир!'
+    };
 
+    return {
+        sayHello: function (lang) {
+            return helloInLang[lang];
+        }
+    };
+});
+
+// file hello.js
+define(['./lib/greeting'], function(greeting) {
+    var phrase = greeting.sayHello('en');
+    document.write(phrase);
+});
+						</code>
+					</pre>
+				</section>
 
 				<section>
-					<h2>What is a module in ES2015+?</h2>
+					<h3>ECMAScript Harmony (ES6)</h3>
+				</section>
+				<section>
+					<p>Main implementation features:</p>
+					<ul class="list">
+						<li>Used for both <span class="select">server/client</span> side</li>
+						<li><span class="select">Runtime/static loading</span> of modules supported</li>
+						<li>When you <span class="select">import</span>, you get back <span class="select">bindings value</span> (actual value).</li>
+						<li>Import via “<span class="select">import</span>” and export via “<span class="select">export</span>”</li>
+						<li><span class="select">Static analyzing</span> — You can determine imports and exports at compile time (statically)
+							— you only have to look at the source code, you don’t have to execute it</li>
+						<li>Tree shakeable, because of static analyzing supported by ES6</li>
+						<li>Always get an actual value so live changes in the module itself</li>
+						<li>Better cyclic dependency management than <span class="select">CommonJS</span></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What is a module in ES6?</h2>
 					<section data-markdown>
 					<textarea data-template>
 						A module is a file with a code.
@@ -165,6 +221,55 @@ define(['./lib/greeting'], function(greeting) {
 						Other modules can connect them via an  <span class="select">import</span> call.
 					</textarea>
 					</section>
+				</section>
+
+				<section>
+					<p>Example</p>
+					<pre>
+						<code class="javascript hljs" style="font-size: 16px;">// file lib/greeting.js
+const helloInLang = {
+    en: 'Hello world!',
+    es: '¡Hola mundo!',
+    ru: 'Привет, мир!'
+};
+
+export const greeting = {
+    sayHello: function (lang) {
+        return helloInLang[lang];
+    }
+};
+
+// file hello.js
+import { greeting } from "./lib/greeting";
+
+const phrase = greeting.sayHello("ru");
+document.write(phrase);
+						</code>
+					</pre>
+				</section>
+
+
+				<section id="fragments">
+					<h3>JavaScript build tools</h3>
+
+					<p class="fragment description">Build tools for cross-platform languages like .Net or Java are a usual thing;
+						however, using such capabilities with JavaScript can seem ridiculous.
+						Though, times change. As soon as developers have started to use JS for large-scale projects,
+						they’ve faced the issues with scalability, maintenance, security and general performance.
+						This is where build tools can prove to be useful.
+					</p>
+				</section>
+				<section>
+					<h4>JavaScript build tools:</h4>
+					<ul>
+						<li>WebPack</li>
+						<li>Grunt</li>
+						<li>Gulp</li>
+						<li>Yeoman</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Thanks for attention:)</h1>
 				</section>
 			</div>
 		</div>
