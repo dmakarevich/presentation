@@ -88,7 +88,7 @@
 				<section>
 					<p>Example</p>
 					<pre>
-						<code class="javascript hljs" style="font-size: 16px;">// файл greeting.js
+						<code class="javascript hljs" style="font-size: 16px;">// file greeting.js
 var helloInLang = {
     en: 'Hello world!',
     es: '¡Hola mundo!',
@@ -101,7 +101,7 @@ var sayHello = function (lang) {
 
 module.exports.sayHello = sayHello;
 
-// файл hello.js
+// file hello.js
 var sayHello = require('./lib/greeting').sayHello;
 
 var phrase = sayHello('en');
@@ -115,40 +115,37 @@ console.log(phrase);
 				<section>
 					<p>Main implementation features:</p>
 					<ul class="list">
-						<li>Implemented by <span class="select">node</span></li>
-						<li>Used for the server side when you have modules installed</li>
-						<li>No runtime/async module loading</li>
+						<li>Implemented by <span class="select">RequireJs</span></li>
+						<li>Used for the client side (browser) when you want dynamic loading of modules</li>
 						<li>import via “<span class="select">require</span>”</li>
-						<li>export via “<span class="select">module.exports</span>”</li>
-						<li>When you import you get back an object</li>
-						<li>No tree shaking, because when you import you get an object</li>
-						<li>No static analyzing, as you get an object, so property lookup is at runtime</li>
-						<li>You always get a copy of an object, so no live changes in the module itself</li>
-						<li>Poor cyclic dependency management</li>
-						<li>Simple Syntax</li>
+						<li>Complex Syntax</li>
 					</ul>
+					<p>In addition, AMD implementations allow developers to encapsulate code in smaller, more logically-organized files, just like Java, and other programming languages.</p>
+					<p>The AMD specification is implemented by Dojo Toolkit, RequireJS, and ScriptManJS.</p>
 				</section>
 				<section>
 					<p>Example</p>
 					<pre>
-						<code class="javascript hljs" style="font-size: 16px;">// файл greeting.js
-var helloInLang = {
-    en: 'Hello world!',
-    es: '¡Hola mundo!',
-    ru: 'Привет, мир!'
-};
+						<code class="javascript hljs" style="font-size: 16px;">// file lib/greeting.js
+define(function() {
+    var helloInLang = {
+        en: 'Hello world!',
+        es: '¡Hola mundo!',
+        ru: 'Привет, мир!'
+    };
 
-var sayHello = function (lang) {
-    return helloInLang[lang];
-}
+    return {
+        sayHello: function (lang) {
+            return helloInLang[lang];
+        }
+    };
+});
 
-module.exports.sayHello = sayHello;
-
-// файл hello.js
-var sayHello = require('./lib/greeting').sayHello;
-
-var phrase = sayHello('en');
-console.log(phrase);
+// file hello.js
+define(['./lib/greeting'], function(greeting) {
+    var phrase = greeting.sayHello('en');
+    document.write(phrase);
+});
 						</code>
 					</pre>
 				</section>
