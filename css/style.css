@@ -1,0 +1,16 @@
+.list {
+  font-size: 22px;
+}
+
+.list li {
+  margin-bottom: 10px;
+}
+
+.select {
+  font-style: italic;
+  color: #6ca0e8;
+}
+
+.subtitle {
+  color: #0000f1;
+}

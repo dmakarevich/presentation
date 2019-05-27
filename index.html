@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<link rel="stylesheet" href="css/style.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Modular Systems</h1>
+					<p class="subtitle">in JavaScript</p>
+				</section>
+
+				<section>
+					<h2>Introduction</h2>
+					<section>
+						<img data-src="img/intro.jpg">
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+
+							JavaScript has never been a perfect programming language.
+							One of the weaknesses in JS was modularity, or rather its absence.
+							Indeed, why in the scripting language, which animates the snowflakes falling on the page and validates the form,
+							to take care of code isolation and dependencies? After all,
+							everything can live good and communicate with each other in one global area - the window.
+						</textarea>
+					</section>
+					<section >
+						<p>
+							Over time, JavaScript was transformed into a general-purpose language,
+							so it began to be used to build complex applications in various environments (browser, server).
+							At the same time, it was impossible to rely on the old approaches to the interaction of program components
+							through the global area: as the code grew, the application became very fragile.
+						</p>
+					</section>
+				</section>
+
+				<section id="fragments">
+					<h3>Different Types of JS Module Systems:</h3>
+					<ul>
+						<li class="fragment">CommonJS Modules</li>
+						<li class="fragment">Async Module Definition (AMD)</li>
+						<li class="fragment">Universal Module Definition (UMD)</li>
+						<li class="fragment">ECMAScript Harmony (ES6)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>CommonJS Modules</h3>
+				</section>
+				<section>
+					<p>Main implementation features:</p>
+					<ul class="list">
+						<li>Implemented by <span class="select">node</span></li>
+						<li>Used for the server side when you have modules installed</li>
+						<li>No runtime/async module loading</li>
+						<li>import via “<span class="select">require</span>”</li>
+						<li>export via “<span class="select">module.exports</span>”</li>
+						<li>When you import you get back an object</li>
+						<li>No tree shaking, because when you import you get an object</li>
+						<li>No static analyzing, as you get an object, so property lookup is at runtime</li>
+						<li>You always get a copy of an object, so no live changes in the module itself</li>
+						<li>Poor cyclic dependency management</li>
+						<li>Simple Syntax</li>
+					</ul>
+				</section>
+				<section>
+					<p>Example</p>
+					<pre>
+						<code class="javascript hljs" style="font-size: 16px;">// файл greeting.js
+var helloInLang = {
+    en: 'Hello world!',
+    es: '¡Hola mundo!',
+    ru: 'Привет, мир!'
+};
+
+var sayHello = function (lang) {
+    return helloInLang[lang];
+}
+
+module.exports.sayHello = sayHello;
+
+// файл hello.js
+var sayHello = require('./lib/greeting').sayHello;
+
+var phrase = sayHello('en');
+console.log(phrase);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>AMD</h3>
+				</section>
+				<section>
+					<p>Main implementation features:</p>
+					<ul class="list">
+						<li>Implemented by <span class="select">node</span></li>
+						<li>Used for the server side when you have modules installed</li>
+						<li>No runtime/async module loading</li>
+						<li>import via “<span class="select">require</span>”</li>
+						<li>export via “<span class="select">module.exports</span>”</li>
+						<li>When you import you get back an object</li>
+						<li>No tree shaking, because when you import you get an object</li>
+						<li>No static analyzing, as you get an object, so property lookup is at runtime</li>
+						<li>You always get a copy of an object, so no live changes in the module itself</li>
+						<li>Poor cyclic dependency management</li>
+						<li>Simple Syntax</li>
+					</ul>
+				</section>
+				<section>
+					<p>Example</p>
+					<pre>
+						<code class="javascript hljs" style="font-size: 16px;">// файл greeting.js
+var helloInLang = {
+    en: 'Hello world!',
+    es: '¡Hola mundo!',
+    ru: 'Привет, мир!'
+};
+
+var sayHello = function (lang) {
+    return helloInLang[lang];
+}
+
+module.exports.sayHello = sayHello;
+
+// файл hello.js
+var sayHello = require('./lib/greeting').sayHello;
+
+var phrase = sayHello('en');
+console.log(phrase);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>UMD</h3>
+				</section>
+
+
+				<section>
+					<h2>What is a module in ES2015+?</h2>
+					<section data-markdown>
+					<textarea data-template>
+						A module is a file with a code.
+
+						In this file, the keyword <span class="select">export</span> marks variables and functions that can be used externally.
+
+						Other modules can connect them via an  <span class="select">import</span> call.
+					</textarea>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
