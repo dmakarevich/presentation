@@ -161,8 +161,11 @@ define(['./lib/greeting'], function(greeting) {
 							As a result, UMD modules are capable of working on both <span class="select">client and server</span>.
 						</li>
 					</ul>
-					<p class="description">Part of the reasons to choose Es6 is that it is simple to use, it is compatible with a browser and non-browser environment,
-						it is very fast in compiling, it operates smoothly with existing Javascript modules like AMD, CommonJs, and Node.js, etc.
+					<p class="description">Universal Module Definition is a Combination of CommonJs + AMD. It can be used for both AMD/CommonJs environments
+
+						UMD primarily creates a way of using either AMD or CommonJs, while it also supports the global variable definition. Due to this, UMD modules are capable of working everywhere, be it in the client, on the server or elsewhere.
+
+						The UMD pattern usually strives to be compatible with most of the popular script loaders such as RequireJS, and the likes.
 					</p>
 				</section>
 				<section>
